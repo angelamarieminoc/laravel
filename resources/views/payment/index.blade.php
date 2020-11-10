@@ -4,7 +4,7 @@
 
         <div class="mb-10 text-sm text-center text-gray-600">            
             <h1 class="font-bold text-xl text-gray-800 leading-tight">
-                {{ __('Payment') }}
+                {{ __('One Time Payment') }}
             </h1>
         </div>        
 
@@ -14,7 +14,11 @@
         </div>
         
         <form method="POST" action="{{ route('payment') }}">
-            <div>
+            <div class="text-gray-600">            
+                <x-jet-label for="name" value="{{ __('Amount') }}" /> $100                
+            </div> 
+
+            <div class="mt-5">
                 <x-jet-label for="name" value="{{ __('Card Holder Name') }}" />
                 <x-jet-input id="name" class="block mt-1 w-full" type="text" id="card-holder-name" name="card-holder-name" :value="old('name')" required="required" autofocus />
             </div>
@@ -78,11 +82,18 @@
                 });
 
                 function clearErrorMessage() {
+                    let buttonText = $('#card-button').html();
+                    $('#card-button').html("Processing...");
+                    $('#card-button').attr('disabled', 'disabled');
+
                     $('.list-inside').html();
                     $('.list-inside').closest('.error-message').attr('style', 'display: none;');
                 }
 
                 function addErrorMessage(message) {
+                    $('#card-button').removeAttr('disabled');
+                    $('#card-button').html("Process Payment");
+
                     $('.list-inside').html('<li>'+message+'</li>');
                     $('.list-inside').closest('.error-message').removeAttr('style');
                 }

@@ -31,6 +31,9 @@ class PaymentController extends Controller
 
             $user->createOrGetStripeCustomer();    
             $user->addPaymentMethod($request->get('payment_method_id'));
+            $user->charge(100, $request->get('payment_method_id'));
+
+            session()->flash('message', 'Payment has been successful.');
 
             return Response::json(['success' => true]);
         } catch (\Exception $e) {

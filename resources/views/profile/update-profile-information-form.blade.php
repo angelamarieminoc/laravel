@@ -65,6 +65,13 @@
             <x-jet-input id="email" type="email" class="mt-1 block w-full" wire:model.defer="state.email" />
             <x-jet-input-error for="email" class="mt-2" />
         </div>
+
+        <!-- DOB -->                            
+        <div class="col-span-6 sm:col-span-4">
+            <x-jet-label for="dob" value="{{ __('Date Of Birth') }}" />
+            <x-jet-input id="dob" type="text" class="block mt-1 w-full" wire:model.defer="state.dob" autocomplete="dob" />
+            <x-jet-input-error for="dob" class="mt-2" />
+        </div>
     </x-slot>
 
     <x-slot name="actions">
