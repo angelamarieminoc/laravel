@@ -26,7 +26,7 @@ class CheckUserPayment
         if (Auth::check()) {
             if (!$request->user()->subscribed('default') && !in_array(Route::currentRouteName(), $this->excludeRoutes)) {
                 return redirect('payment');
-            } elseif (Route::currentRouteName() == 'payment') {
+            } elseif ($request->user()->subscribed('default') && Route::currentRouteName() == 'payment') {
                 return redirect('dashboard');
             }
         }    
