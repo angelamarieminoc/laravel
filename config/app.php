@@ -42,7 +42,9 @@ return [
     'debug' => (bool) env('APP_DEBUG', false),
 
 
-    'strip_public_key' => env('STRIPE_KEY', null),
+    'stripe_public_key'             => env('STRIPE_KEY', null),
+    'stripe_price_id'               => env('STRIPE_PRICE_ID', null),
+    'stripe_subscription_amount'    => env('STRIPE_SUBSCRIPTION_AMOUNT', 10),
 
     /*
     |--------------------------------------------------------------------------

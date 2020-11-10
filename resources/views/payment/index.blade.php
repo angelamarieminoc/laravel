@@ -4,7 +4,7 @@
 
         <div class="mb-10 text-sm text-center text-gray-600">            
             <h1 class="font-bold text-xl text-gray-800 leading-tight">
-                {{ __('One Time Payment') }}
+                {{ __('Subscription') }}
             </h1>
         </div>        
 
@@ -15,7 +15,7 @@
         
         <form method="POST" action="{{ route('payment') }}">
             <div class="text-gray-600">            
-                <x-jet-label for="name" value="{{ __('Amount') }}" /> $100                
+                <x-jet-label for="name" value="{{ __('Amount') }}" /> ${{ $stripe_subscription_amount }}                
             </div> 
 
             <div class="mt-5">

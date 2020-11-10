@@ -30,8 +30,10 @@ class PaymentController extends Controller
             $user = Auth::user();
 
             $user->createOrGetStripeCustomer();    
-            $user->addPaymentMethod($request->get('payment_method_id'));
-            $user->charge(100, $request->get('payment_method_id'));
+            /*$user->addPaymentMethod($request->get('payment_method_id'));
+            $user->charge(100, $request->get('payment_method_id'));*/
+
+            $user->newSubscription('default', config('app.stripe_price_id'))->create($request->get('payment_method_id'));
 
             session()->flash('message', 'Payment has been successful.');
 
