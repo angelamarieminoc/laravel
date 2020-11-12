@@ -14,7 +14,6 @@ class ViewServiceProvider extends ServiceProvider
      */
     public function boot() : void
     {
-        View::share('stripe_public_key', config('app.stripe_public_key'));
-        View::share('stripe_subscription_amount', config('app.stripe_subscription_amount'));        
+        View::share('stripe_public_key', config('services.stripe.public_key'));
     }
 }

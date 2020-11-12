@@ -72,6 +72,13 @@
             <x-jet-input id="dob" type="text" class="block mt-1 w-full" wire:model.defer="state.dob" autocomplete="dob" />
             <x-jet-input-error for="dob" class="mt-2" />
         </div>
+
+        <!-- DOB -->                            
+        <div class="col-span-6 sm:col-span-4">
+            <x-jet-label for="dob" value="{{ __('Phone Number') }}" />
+            <x-jet-input id="phone_number" type="text" class="block mt-1 w-full" wire:model.defer="state.phone_number" autocomplete="phone_number" />
+            <x-jet-input-error for="phone_number" class="mt-2" />
+        </div>
     </x-slot>
 
     <x-slot name="actions">

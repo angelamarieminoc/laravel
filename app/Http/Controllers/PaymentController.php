@@ -6,34 +6,36 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Auth;
+use App\Services\StripePlanServiceInterface;
 
 class PaymentController extends Controller
 {
     /**
      * @param Request $request
+     * @param StripePlanServiceInterface $stripePlanService
      */
-    public function index(Request $request)
+    public function index(Request $request, StripePlanServiceInterface $stripePlanService)
     {
         if (Gate::inspect('payment')->allowed()) {
             return redirect('dashboard');
         }
         
-        return view('payment.index');
+        $price = $stripePlanService->getAmountByPriceId(config('services.stripe.product_id'), config('services.stripe.price_id'));
+
+        return view('payment.index', ['price' => $price]);
     }
 
     /**
      * @param Request $request
      */
-    public function paymentMethod(Request $request)
+    public function paymentMethod(Request $request, StripePlanServiceInterface $stripePlanService)
     {
         try {
             $user = Auth::user();
 
             $user->createOrGetStripeCustomer();    
-            /*$user->addPaymentMethod($request->get('payment_method_id'));
-            $user->charge(100, $request->get('payment_method_id'));*/
 
-            $user->newSubscription('default', config('app.stripe_price_id'))->create($request->get('payment_method_id'));
+            $user->newSubscription('default', config('services.stripe.price_id'))->create($request->get('payment_method_id'));
 
             session()->flash('message', 'Payment has been successful.');
 

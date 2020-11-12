@@ -9,6 +9,7 @@
 ```
 STRIPE_KEY=your-stripe-key
 STRIPE_SECRET=your-stripe-secret
+STRIPE_PRODUCT_ID=your-stripe-product-id
 STRIPE_PRICE_ID=your-stripe-price-id            
 
 HUBSPOT_API_KEY=your-hubspot-api-key                  

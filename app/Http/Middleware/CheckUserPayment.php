@@ -24,11 +24,11 @@ class CheckUserPayment
     public function handle(Request $request, Closure $next)
     {
         if (Auth::check()) {
-            if (!$request->user()->subscribed('default') && !in_array(Route::currentRouteName(), $this->excludeRoutes)) {
+            /*if (!$request->user()->subscribed('default') && !in_array(Route::currentRouteName(), $this->excludeRoutes)) {
                 return redirect('payment');
             } elseif ($request->user()->subscribed('default') && Route::currentRouteName() == 'payment') {
                 return redirect('dashboard');
-            }
+            }*/
         }    
 
         return $next($request);

@@ -32,5 +32,12 @@ return [
 
     'hubspot'   => [
         'api_key'   => env('HUBSPOT_API_KEY', 'ae0ac661-d8fd-4f48-a8ac-1684eb3575ed'),
+    ],
+
+    'stripe'   => [
+        'public_key'   => env('STRIPE_KEY'),
+        'secret_key'   => env('STRIPE_SECRET'),
+        'product_id'   => env('STRIPE_PRODUCT_ID'),
+        'price_id'     => env('STRIPE_PRICE_ID'),
     ]
 ];

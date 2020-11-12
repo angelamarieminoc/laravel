@@ -43,8 +43,9 @@ return [
 
 
     'stripe_public_key'             => env('STRIPE_KEY', null),
+    'stripe_secret_key'             => env('STRIPE_SECRET', null),
     'stripe_price_id'               => env('STRIPE_PRICE_ID', null),
-    'stripe_subscription_amount'    => env('STRIPE_SUBSCRIPTION_AMOUNT', 10),
+    'stripe_product_id'             => env('STRIPE_PRODUCT_ID', null),
 
     /*
     |--------------------------------------------------------------------------

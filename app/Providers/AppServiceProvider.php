@@ -5,6 +5,8 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Validator as ValidatorFacade;
 use Illuminate\Support\Arr;
+use App\Services\StripePlanServiceInterface;
+use App\Services\StripePlanService;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -16,6 +18,9 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         //
+        $this->app->singleton(StripePlanServiceInterface::class, function ($app) {
+            return new StripePlanService();
+        });  
     }
 
     /**

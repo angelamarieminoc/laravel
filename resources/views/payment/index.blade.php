@@ -15,7 +15,7 @@
         
         <form method="POST" action="{{ route('payment') }}">
             <div class="text-gray-600">            
-                <x-jet-label for="name" value="{{ __('Amount') }}" /> ${{ $stripe_subscription_amount }}                
+                <x-jet-label for="name" value="{{ __('Amount') }}" /> ${{ $price }}              
             </div> 
 
             <div class="mt-5">
@@ -75,7 +75,7 @@
                             if (data.success == false) {
                                 addErrorMessage(data.error.message);
                             } else {
-                                window.location.href = '{{ route('dashboard') }}';
+                                window.location.href = '{{ route('profile.show') }}';
                             }                            
                         });
                     }
