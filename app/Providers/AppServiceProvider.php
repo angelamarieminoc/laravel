@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Validator as ValidatorFacade;
+use Illuminate\Validation\Validator;
 use Illuminate\Support\Arr;
 use App\Services\StripePlanServiceInterface;
 use App\Services\StripePlanService;
@@ -57,6 +58,16 @@ class AppServiceProvider extends ServiceProvider
             return $function($value, $parameters, [
                 'AU' => '^(?:\+?(61))? ?(?:\((?=.*\)))?(0?[2-57-8])\)? ?(\d\d(?:[- ](?=\d{3})|(?!\d\d[- ]?\d[- ]))\d\d[- ]?\d[- ]?\d{3})$',
             ]);
+        });
+
+        ValidatorFacade::extend('fullname', function (
+            string $attribute, $value, array $parameters, Validator $validator
+        ) : bool {
+            if (preg_match('/^[a-zA-Z]+(?:\s[a-zA-Z]+)+$/', $value)) {
+                return true;
+            } else {
+                return false;
+            }
         });
     }
 }

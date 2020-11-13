@@ -15,10 +15,15 @@ class CreateHubspotContact
      */
     public function handle(Registered $event)
     {
-        $hubspotContact = new HubspotContactService();
-        $user           = $event->user;        
-        $names          = explode(' ', $user->name);
+        $hubspotContact     = new HubspotContactService();
+        $user               = $event->user;        
+        $names              = explode(' ', $user->name);
+        $lastname           = array_pop($names);
+        $names              = implode(' ', $names);
     
-        $hubspotContact->createContact($names[0], $names[1], $user->email);
+        $resource           = $hubspotContact->createContact($names, $lastname, $user->email);
+        $user->hubspot_id   = $resource->data->vid;
+
+        $user->save();
     }
 }

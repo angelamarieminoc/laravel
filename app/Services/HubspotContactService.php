@@ -19,7 +19,18 @@ class HubspotContactService
     {
         $contact = new Contacts($this->client);
 
-        return $contact->create([
+        return $contact->createOrUpdate($email, [
+            ['property' => 'email',     'value' => $email],
+            ['property' => 'firstname', 'value' => $firstName],
+            ['property' => 'lastname',  'value' => $lastName],
+        ]);
+    }
+
+    public function updateContact($hubspotId, string $firstName, string $lastName, string $email) : Response
+    {
+        $contact = new Contacts($this->client);
+
+        return $contact->update($hubspotId, [
             ['property' => 'email',     'value' => $email],
             ['property' => 'firstname', 'value' => $firstName],
             ['property' => 'lastname',  'value' => $lastName],

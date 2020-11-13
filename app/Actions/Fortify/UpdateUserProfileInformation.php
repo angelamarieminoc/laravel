@@ -18,13 +18,14 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
      */
     public function update($user, array $input)
     {
+        $currentEmail = $user->email;
         Validator::make($input, [
-            'name' => ['required', 'string', 'max:255'],
+            'name' => ['required', 'fullname', 'string', 'max:255'],
             'email' => ['required', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
             'dob' => ['required', 'string', 'date_format:Y-m-d'],
             'photo' => ['nullable', 'image', 'max:1024'],
             'phone_number' => ['nullable', 'string'],
-        ])->validateWithBag('updateProfileInformation');
+        ], ['fullname' => 'Name must contain firstname and lastname.'])->validateWithBag('updateProfileInformation');
 
         if (isset($input['photo'])) {
             $user->updateProfilePhoto($input['photo']);
@@ -41,6 +42,8 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
                 'phone_number' => $input['phone_number'],
             ])->save();
         }
+
+        event(new \App\Events\UserInfoUpdated($user, $currentEmail));
     }
 
     /**
